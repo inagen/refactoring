@@ -15,12 +15,17 @@ import java.sql.Statement;
  * @author akirakozov
  */
 public class Main {
+    public static final String DB_NAME = "jdbc:sqlite:test.db";
+
+
+    private static final String sql =
+            "CREATE TABLE IF NOT EXISTS PRODUCT" +
+            "(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+            " NAME           TEXT    NOT NULL, " +
+            " PRICE          INT     NOT NULL)";
+
     public static void main(String[] args) throws Exception {
-        try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db")) {
-            String sql = "CREATE TABLE IF NOT EXISTS PRODUCT" +
-                    "(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                    " NAME           TEXT    NOT NULL, " +
-                    " PRICE          INT     NOT NULL)";
+        try (Connection c = DriverManager.getConnection(DB_NAME)) {
             Statement stmt = c.createStatement();
 
             stmt.executeUpdate(sql);
